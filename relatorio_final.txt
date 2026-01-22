@@ -1,0 +1,213 @@
+
+
+================================================================================
+RESUMO SIMPLIFICADO
+================================================================================
+
+Este breve relatório apresenta uma análise completa da base de dados utilizada para 
+modelagem preditiva de um processo estocástico, incluindo análise descritiva, 
+tratamento de outliers, visualização de variáveis e aplicação de um modelo 
+AutoRegressivo (AR).
+
+================================================================================
+1. INFORMAÇÕES DA BASE DE DADOS
+================================================================================
+
+- Total de observações (original): 730558
+- Total de observações (após limpeza): 506657
+- Observações removidas (outliers): 223901
+- Número de variáveis numéricas: 8
+- Variáveis: extTemp (C), intTemp (C), humidity (percent), pm25 (mg/m3), pm10 (mg/m3), adc0 (mg/m3), adc2 (ppm), adc3 (mg/m3)
+
+================================================================================
+2. ANÁLISE ESTATÍSTICA DESCRITIVA
+================================================================================
+
+
+Variável: extTemp (C)
+  - Média: 28.3276
+  - Mediana: 27.3167
+  - Desvio Padrão: 2.5485
+  - Mínimo: 20.6333
+  - Máximo: 40.0343
+
+Variável: intTemp (C)
+  - Média: 32.4391
+  - Mediana: 31.7513
+  - Desvio Padrão: 3.3647
+  - Mínimo: 14.3760
+  - Máximo: 43.6466
+
+Variável: humidity (percent)
+  - Média: 65.9861
+  - Mediana: 59.0825
+  - Desvio Padrão: 24.1058
+  - Mínimo: 23.4094
+  - Máximo: 100.0000
+
+Variável: pm25 (mg/m3)
+  - Média: 12.3542
+  - Mediana: 12.2899
+  - Desvio Padrão: 1.1528
+  - Mínimo: 7.5396
+  - Máximo: 17.4859
+
+Variável: pm10 (mg/m3)
+  - Média: 31.0540
+  - Mediana: 32.0773
+  - Desvio Padrão: 3.6299
+  - Mínimo: 20.5088
+  - Máximo: 40.1938
+
+Variável: adc0 (mg/m3)
+  - Média: 2.5052
+  - Mediana: 2.5364
+  - Desvio Padrão: 0.6699
+  - Mínimo: 0.0041
+  - Máximo: 6.9259
+
+Variável: adc2 (ppm)
+  - Média: 0.2017
+  - Mediana: 0.1987
+  - Desvio Padrão: 0.0250
+  - Mínimo: 0.1121
+  - Máximo: 0.2960
+
+Variável: adc3 (mg/m3)
+  - Média: 61.7439
+  - Mediana: 62.7380
+  - Desvio Padrão: 6.3733
+  - Mínimo: 31.8709
+  - Máximo: 83.8995
+
+================================================================================
+3. TRATAMENTO DE OUTLIERS
+================================================================================
+
+Método utilizado: Interquartile Range (IQR)
+Critério: Valores fora do intervalo [Q1 - 1.5*IQR, Q3 + 1.5*IQR]
+
+  - extTemp (C): 12589 outliers detectados
+  - intTemp (C): 3529 outliers detectados
+  - humidity (percent): 0 outliers detectados
+  - pm25 (mg/m3): 200635 outliers detectados
+  - pm10 (mg/m3): 6563 outliers detectados
+  - adc0 (mg/m3): 200490 outliers detectados
+  - adc2 (ppm): 2456 outliers detectados
+  - adc3 (mg/m3): 200667 outliers detectados
+
+Total de linhas com outliers removidas: 223901
+Percentual removido: 30.65%
+
+================================================================================
+4. CORRELAÇÃO ENTRE VARIÁVEIS
+================================================================================
+
+  - extTemp (C) <-> intTemp (C): 0.6948
+  - extTemp (C) <-> adc2 (ppm): 0.5591
+
+================================================================================
+5. MODELO AUTOREGRESSIVO (AR) - PROCESSO ESTOCÁSTICO
+================================================================================
+
+Variável Alvo: extTemp (C)
+Variáveis Preditoras: intTemp (C), humidity (percent), pm25 (mg/m3), pm10 (mg/m3), adc0 (mg/m3), adc2 (ppm), adc3 (mg/m3)
+
+Divisão dos dados:
+  - Conjunto de Treino: 405325 amostras (80%)
+  - Conjunto de Teste: 101332 amostras (20%)
+
+================================================================================
+6. DESEMPENHO DO MODELO
+================================================================================
+
+CONJUNTO DE TREINO:
+  - R² Score: 0.6751
+  - RMSE (Root Mean Squared Error): 1.2060
+  - MAE (Mean Absolute Error): 0.9081
+  - MSE (Mean Squared Error): 1.4543
+
+CONJUNTO DE TESTE:
+  - R² Score: 0.6734
+  - RMSE (Root Mean Squared Error): 1.2064
+  - MAE (Mean Absolute Error): 0.9080
+  - MSE (Mean Squared Error): 1.4553
+
+Interpretação:
+  - Um R² de 0.6734 significa que o modelo explica 67.34% da variância 
+    da variável alvo no conjunto de teste.
+  - O RMSE de 1.2064 indica o erro médio quadrático da previsão.
+  - O MAE de 0.9080 representa o erro médio absoluto.
+
+================================================================================
+7. COEFICIENTES DO MODELO
+================================================================================
+
+Equação do Modelo:
+  extTemp (C) = 27.788160 + (1.117216) * intTemp (C) + (-0.557714) * humidity (percent) + (0.000000) * pm25 (mg/m3) + (-0.240916) * pm10 (mg/m3) + (0.000000) * adc0 (mg/m3) + (0.662374) * adc2 (ppm) + (0.000000) * adc3 (mg/m3)
+
+Importância relativa dos coeficientes (ordenados por magnitude):
+  - intTemp (C): 1.117216
+  - adc2 (ppm): 0.662374
+  - humidity (percent): 0.557714
+  - pm10 (mg/m3): 0.240916
+  - pm25 (mg/m3): 0.000000
+  - adc0 (mg/m3): 0.000000
+  - adc3 (mg/m3): 0.000000
+
+================================================================================
+8. PRINCIPAIS INSIGHTS E ACHADOS
+================================================================================
+
+✓ QUALIDADE DOS DADOS:
+  - 30.65% dos dados foram removidos como outliers,
+    indicando presença de valores anômalos na base.
+  - Após limpeza, 506657 observações foram mantidas para análise.
+
+✓ DISTRIBUIÇÃO DAS VARIÁVEIS:
+  - A maior parte das variáveis segue uma distribuição próxima à normal.
+  - Análise de correlação revelou relacionamentos entre as variáveis.
+
+✓ DESEMPENHO PREDITIVO:
+  - O modelo alcançou um R² de 0.6734 no conjunto de teste.
+  - Houve um diferença de 0.0017 entre treino e teste,
+    indicando boa generalização.
+  - Os resíduos mostram uma distribuição aproximadamente normal com média próxima a zero.
+
+================================================================================
+9. RECOMENDAÇÕES
+================================================================================
+
+1. O modelo proposto é adequado para previsões de extTemp (C).
+
+2. Considere experimentar modelos mais avançados como:
+   - AutoRegressive Integrated Moving Average (ARIMA)
+   - Vector AutoRegression (VAR)
+   - Machine Learning (Random Forest, Gradient Boosting)
+
+3. Para melhorar o desempenho:
+   - Coletar mais dados (se possível)
+   - Explorar engenharia de features
+   - Ajustar hiperparâmetros do modelo
+
+4. Monitorar o desempenho em produção e retreinar regularmente.
+
+================================================================================
+10. ARQUIVOS GERADOS
+================================================================================
+
+Dados:
+  • cleaned_data_without_outliers.csv
+
+Gráficos:
+  • 01_distribuicao_frequencia.png
+  • 02_matriz_correlacao.png
+  • 03_scatter_plots.png
+  • 04_valores_reais_vs_previstos.png
+  • 05_analise_residuos.png
+  • 06_serie_temporal_previsoes.png
+  • relatorio_final.txt
+
+================================================================================
+
+Data de análise: 21/01/2026 23:35:19

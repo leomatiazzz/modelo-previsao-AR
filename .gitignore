@@ -1,0 +1,71 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# =========================
+# Ambiente virtual
+# =========================
+venv/
+.venv/
+env/
+.env/
+ENV/
+
+# =========================
+# Jupyter Notebook
+# =========================
+.ipynb_checkpoints/
+*.nbconvert.ipynb
+
+# =========================
+# VSCode
+# =========================
+.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+
+# =========================
+# Logs e arquivos temporários
+# =========================
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# =========================
+# Sistema operacional
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Cache e ferramentas
+# =========================
+.mypy_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# =========================
+# Dados e saídas (opcional)
+# =========================
+data/
+outputs/
+models/
+
+# Dados grandes
+*.csv
+data/
+
