@@ -21,7 +21,7 @@ Os arquivos podem ser baixados neste link do Google Drive:
 
 [📂 Acessar a base de dados](https://drive.google.com/drive/folders/1uougMhXmtrG_ao9WhHl3EXc0MzK6kA3_?usp=sharing)
 
-**OBS: Sugiro baixar apenas o arquivo "cleaned_data.csv". A versão sem outliers será gerada enquanto roda o código posteriormente.**
+**OBS**: Sugiro baixar apenas o arquivo "cleaned_data.csv". A versão sem outliers será gerada enquanto roda o código posteriormente.
 
 ### Informações Gerais
 
